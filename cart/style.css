@@ -179,9 +179,16 @@ label {
     float: right;
     width: auto;
   }
-  .product-image img {
-    margin: 0 0 10px 10px;
-  }
+ 
+
+
+.product-image img {
+  max-width: 100%;
+  height: auto;
+  margin: 0 0 10px 10px;
+  display: block;
+}
+
 
   .product-details {
     float: none;
