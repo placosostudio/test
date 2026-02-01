@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Responsive Grid Layout</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,800,900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --main-radius: 5px;
+      --main-padding: 5px;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      margin: 0;
+      background-color: #000; /* optional background */
+    }
+
+    .container {
+      display: grid;
+      height: 100vh;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      grid-template-areas:
+        "main main main main"
+        "content1 content2 content3 content4"
+        "content5 content6 content7 content8"
+        "content11 content12 content13 content14";
+      gap: 0.2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #004d40;
+      text-align: center;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    main {
+      background: #84ffff;
+      grid-area: main;
+      border-radius: var(--main-radius);
+      padding: var(--main-padding);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    main h1 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+    }
+
+    main img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--main-radius);
+    }
+
+    /* Style for each content block */
+    [id^="content"] {
+      background: #6fffd2;
+      border-radius: var(--main-radius);
+      padding: var(--main-padding);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    /* Alternate background colors for variety (optional) */
+    #content2 { background: #64ffda; }
+    #content3 { background: #73ffba; }
+    #content4 { background: #6fffd2; }
+    #content5 { background: #64ffda; }
+    #content6 { background: #73ffba; }
+    #content7 { background: #64ffda; }
+    #content8 { background: #73ffba; }
+    #content11 { background: #6fffd2; }
+    #content12 { background: #64ffda; }
+    #content13 { background: #73ffba; }
+    #content14 { background: #6fffd2; }
+
+    /* Style images inside content blocks */
+    [id^="content"] img {
+      width: 95%;
+      margin: 10px 0;
+      border-radius: var(--main-radius);
+    }
+
+    /* Style buttons */
+    button {
+      width: 200px;
+      height: 30px;
+      border: none;
+      border-radius: var(--main-radius);
+      background-color: #ff0000; /* your primary red color */
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #cc0000; /* darker red on hover */
+    }
+
+    a {
+      text-decoration: none;
+      display: block;
+      margin: 1rem 0;
+    }
+
+    /* Responsive layout for small screens */
+    @media only screen and (max-width: 550px) {
+      .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(17, auto);
+        grid-template-areas:
+          "main"
+          "content1"
+          "content2"
+          "content3"
+          "content4"
+          "content5"
+          "content6"
+          "content7"
+          "content8"
+          "content11"
+          "content12"
+          "content13"
+          "content14";
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Main Banner -->
+    <main>
+      <h1>Main</h1>
+      <img src="images/banner.jpg" alt="Banner" />
+    </main>
+
+    <!-- Content Sections -->
+    <div id="content1">
+      Content1
+      <img src="images/muztymarch1.jpg" alt="Product 1" />
+      <a href="product1/index.html"><button type="button">BUY NOW</button></a>
+    </div>
+    <div id="content2">
+      Content2
+      <img src="images/muztymarch2.jpg" alt="Product 2" />
+      <a href="product2/index.html"><button type="button">BUY NOW</button></a>
+    </div>
+    <div id="content3">
+      Content3
+      <img src="images/muztymarch3.jpg" alt="Product 3" />
+      <a href="product3/index.html"><button type="button">BUY NOW</button></a>
+    </div>
+    <div id="content4">
+      Content4
+      <img src="images/muztymarch4.jpg" alt="Product 4" />
+      <a href="product4/index.html"><button type="button">BUY NOW</button></a>
+    </div>
+    <div id="content5">
+      Content5
+      <img src="images/muztymarch5.jpg" alt="Product 5" />
+      <a href="product5/index.html"><button type="button">BUY NOW</button></a>
+    </div>
+    <div id="content6">
+      Content6
+      <img src="images/muztymarch6.jpg" alt="Product 6" />
+      <a href="product6/index.html"><button type="button">BUY NOW</button></a>
+    </div>
+    <div id="content7">
+      Content7
+      <img src="images/muztymarch7.jpg" alt="Product 7" />
+      <a href="product7/index.html"><button type="button">BUY NOW</button></a>
+    </div>
+    <div id="content8">
+      Content8
+      <img src="images/muztymarch8.jpg" alt="Product 8" />
+      <a href="product8/index.html"><button type="button">BUY NOW</button></a>
+    </div>
+
+    <div id="content11">
+      Content11
+      <img src="images/muztymarch11.jpg" alt="Product 11" />
+      <a href="product11/index.html"><button type="button">BUY NOW</button></a>
+    </div>
+    <div id="content12">
+      Content12
+      <img src="images/muztymarch12.jpg" alt="Product 12" />
+      <a href="product12/index.html"><button type="button">BUY NOW</button></a>
+    </div>
+    <div id="content13">
+      Content13
+      <img src="images/muztymarch13.jpg" alt="Product 13" />
+      <a href="product13/index.html"><button type="button">BUY NOW</button></a>
+    </div>
+    <div id="content14">
+      Content14
+      <img src="images/muztymarch14.jpg" alt="Product 14" />
+      <a href="product14/index.html"><button type="button">BUY NOW</button></a>
+    </div>
+  </div>
+</body>
+</html>

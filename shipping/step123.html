@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <title>Styled Checkout Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- You can include your own stylesheet or embed styles below -->
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background-color: #f4f4f8;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 300;
+      font-size: 2em;
+      margin-bottom: 30px;
+      color: #444;
+    }
+
+    #wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Columns Styling */
+    .column {
+      flex: 1;
+      min-width: 300px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+    }
+
+    /* Styling for forms and sections */
+    .content {
+      margin-bottom: 30px;
+    }
+
+    /* Form Labels & Inputs */
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="phone"],
+    select {
+      padding: 10px 15px;
+      margin: 8px 0 16px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="phone"]:focus,
+    select:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 0.95em;
+      color: #555;
+    }
+
+    /* Checkbox */
+    .same {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .same input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    /* Shipping Options */
+    .shipping-options p {
+      margin: 8px 0;
+    }
+
+    /* Buttons */
+    a.continue, button {
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 24px;
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 4px;
+      font-size: 1em;
+      margin-top: 15px;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    a.continue:hover, button:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+
+    /* Product Review Styles */
+    #ordered {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .product_image img {
+      width: 80px;
+      height: auto;
+      border-radius: 4px;
+      margin-right: 20px;
+    }
+
+    .product_details {
+      flex: 1;
+    }
+
+    .product_name {
+      font-weight: 600;
+      font-size: 1.1em;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .quantity, .price {
+      display: inline-block;
+      margin-right: 20px;
+      font-size: 0.95em;
+      color: #555;
+    }
+
+    /* Totals */
+    .totals {
+      border-top: 2px solid #ddd;
+      padding-top: 20px;
+    }
+
+    .totals span {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 1em;
+    }
+
+    .subtitle {
+      font-weight: 600;
+    }
+
+    #calculated_total {
+      font-size: 1.2em;
+      font-weight: 700;
+    }
+
+    /* Final Button & Notes */
+    #complete {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    #complete button {
+      padding: 14px 28px;
+      font-size: 1.2em;
+      background-color: #28a745;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.2s;
+    }
+
+    #complete button:hover {
+      background-color: #218838;
+      transform: translateY(-2px);
+    }
+
+    .sub {
+      display: block;
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #777;
+    }
+
+    /* Responsive adjustments for small screens */
+    @media(max-width: 768px) {
+      #wrap {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+<h1>Checkout</h1>
+<div id="wrap">
+  <!-- Customer Info & Shipping -->
+  <div class="column">
+    <div class="content" id="email">
+      <form>
+        <label for="email-address">Email Address</label>
+        <input type="email" id="email-address" placeholder="Email Address" />
+        <label for="first_name">First Name</label>
+        <input type="text" id="first_name" placeholder="First Name" />
+        <label for="last_name">Last Name</label>
+        <input type="text" id="last_name" placeholder="Last Name" />
+        <label for="telephone">Telephone</label>
+        <input type="tel" id="telephone" placeholder="Phone (555-555-5555)" />
+        <label for="company">Company</label>
+        <input type="text" id="company" placeholder="Company" />
+        <label for="address">Address</label>
+        <input type="text" id="address" placeholder="Address" />
+        <label for="city">City</label>
+        <input type="text" id="city" placeholder="City" />
+        <label for="state">State</label>
+        <select id="state">
+          <option value="">Select State</option>
+          <option>Alabama</option>
+          <option>Alaska</option>
+          <option>Arkansas</option>
+          <option>Etc.</option>
+        </select>
+        <label for="zip">Zip Code</label>
+        <input type="text" id="zip" placeholder="Zip Code" />
+        <label for="country">Country</label>
+        <select id="country">
+          <option>United States</option>
+          <option>United Kingdom</option>
+          <option>Uganda</option>
+          <option>Etc.</option>
+        </select>
+        <div class="same">
+          <input type="checkbox" id="same_as_shipping" />
+          <label for="same_as_shipping">Same As Shipping Address</label>
+        </div>
+      </form>
+    </div>
+
+    <!-- Shipping Options -->
+    <div class="content" id="shipping">
+      <form>
+        <div>
+          <input type="radio" id="shipping_1" name="shipping" value="4" checked />
+          <label for="shipping_1">Standard Shipping <span class="price">$4.00</span></label>
+        </div>
+        <div>
+          <input type="radio" id="shipping_2" name="shipping" value="8" />
+          <label for="shipping_2">Express Shipping <span class="price">$8.00</span></label>
+        </div>
+        <div>
+          <input type="radio" id="shipping_3" name="shipping" value="12" />
+          <label for="shipping_3">Overnight Shipping <span class="price">$12.00</span></label>
+        </div>
+        <a class="continue" href="../shipping/step2.html">Pay Now</a>
+      </form>
+    </div>
+  </div>
+
+  <!-- Review & Final Total -->
+  <div class="column">
+    <div class="content" id="final_products">
+      <div id="ordered">
+        <div class="product_image">
+          <img src="../images/muztymarch10.jpg" alt="T-Shirt" />
+        </div>
+        <div class="product_details">
+          <span class="product_name">T-Shirt</span>
+          <span class="quantity">Quantity: 1</span>
+          <span class="price">$45.00</span>
+        </div>
+      </div>
+      <div class="totals">
+        <span class="subtitle">Subtotal <span id="sub_price">$45.00</span></span>
+        <span class="subtitle">Tax <span id="sub_tax">$2.00</span></span>
+        <span class="subtitle">Shipping <span id="sub_ship">$4.00</span></span>
+      </div>
+      <div class="final">
+        <span class="title">Total <span id="calculated_total">$51.00</span></span>
+      </div>
+    </div>
+    <div id="complete">
+      <a href="../cart/index.html"><button>Back to Cart</button></a>
+      <div class="sub">
+        By selecting this button, you agree to the purchase and subsequent payment for this order.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts: You can add your JS here for dynamic updates -->
+<script>
+  // Example: You can implement dynamic calculation here
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Column Checkout Style</title>
+  <link rel="stylesheet" href="./style.css">
+<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<body>
+<div id="wrap">
+	<div id="grid">
+		<div class="column column1">
+	
+		<div class="content" id="email">
+			<form class="go-right">
+                <div class="final">
+					<span class="title">Total <span id="calculated_total">$51.00</span></span>
+				</div>
+				<div>
+        <input type="email" name="email" value="" id="email-address" placeholder="Email Address" data-trigger="change" data-validation-minlength="1" data-type="email" data-required="true" data-error-message="Enter a valid email address."/><label for="email">Email Address</label>
+        </div>
+				
+			</form>
+		
+		</div>
+	
+		<div class="content" id="address">
+			<form class="go-right">
+				<div>
+				<input type="name" name="first_name" value="" id="first_name" placeholder="First Name" data-trigger="change" data-validation-minlength="1" data-type="name" data-required="true" data-error-message="Enter Your First Name"/><label for="first_name">First Name</label>
+        </div>
+        
+				<div>
+				<input type="name" name="last_name" value="" id="last_name" placeholder="Last Name" data-trigger="change" data-validation-minlength="1" data-type="name" data-required="true" data-error-message="Enter Your Last Name"/><label for="last_name">Last Name</label>
+				</div>
+				<div>
+				<input type="phone" name="telephone" value="" id="telephone" placeholder="Phone(555)-555-5555" data-trigger="change" data-validation-minlength="1" data-type="number" data-required="true" data-error-message="Enter Your Telephone Number"/><label for="telephone">Telephone</label>
+				</div>
+				<div>
+				<input type="text" name="company" value="" id="company" placeholder="Company" data-trigger="change" data-validation-minlength="1" data-type="name" data-required="false"/>
+          <label for="Company">Company</label>
+				</div>
+				<div>
+				<input type="text" name="address" value="" id="address" placeholder="Address" data-trigger="change" data-validation-minlength="1" data-type="text" data-required="true" data-error-message="Enter Your Billing Address"/><label for="Address">Address</label>
+				</div>
+				<div>
+				<input type="text" name="city" value="" id="city" placeholder="City" data-trigger="change" data-validation-minlength="1" data-type="text" data-required="true" data-error-message="Enter Your Billing City"/><label for="city">City</label>
+				</div>
+				<div>
+				<div class="state_options">
+        			<div class="select">
+                 		<select id="state">
+                  	 		<option value = "1">Alabama</option>
+                   			<option value = "2">Alaska</option>
+                   			<option value = "3">Arkansas</option>
+                   			<option value = "4">Etc.</option>
+                 		</select>
+                 	</div>
+          				<label class="state" for="state">State</label>
+          		</div>
+				</div>
+				<div>
+				<input type="text" name="zip" value="" id="zip" placeholder="Zip Code" data-trigger="change" data-validation-minlength="1" data-type="text" data-required="true" data-error-message="Enter Your Billing Zip Code"/><label for="zip">Zip Code</label>
+				</div>
+				<div>
+				<div class="country_options">
+        			<div class="select">
+                 		<select id="country">
+                  	 		<option value = "1">United States</option>
+                   			<option value = "2">United Kingdom</option>
+                   			<option value = "3">Uganda</option>
+                   			<option value = "4">Etc.</option>
+                 		</select>
+                 	</div>
+                <label class="country" for="country">Country</label>
+          		</div>
+				</div>
+				<div>
+				<input type="checkbox"/>
+				<label class="same" for="same_as_shipping">Same As Shipping Address</label><span></span>
+				</div>
+			</form>
+			
+		</div>
+            
+            
+            <div class="content" id="shipping">
+			<form action="" method="" name="">
+				<div>
+					<input type="radio" id="shipping_1" value="1"/><label for="shipping_1"> Standard Shipping <span class="price">$4.00</span></label>
+				</div>
+				<p>		
+					<input type="radio" id="shipping_2" value="2"/><label for="shipping_2"> Express Shipping <span class="price">$8.00</span></label>
+				</p>
+				<p>		
+					<input type="radio" id="shipping_3" value="3"/><label for="shipping_3"> Overnight Shipping <span class="price">$12.00</span></label>
+				</p>
+                 <a class="continue" href="../shipping/step2.html">pay now</a>
+			</form>
+			
+        
+		</div>
+	</div>
+        
+        
+
+        
+    
+        
+        
+        
+        
+ 	<div class="column column3">
+ 
+		<div class="content" id="final_products">
+			<div class="left" id="ordered">
+				<div class="products">
+					<div class="product_image">
+						<img src="../images/muztymarch10.jpg"/>
+					</div>
+					<div class="product_details">
+						<span class="product_name">t shirt</span>
+						<span class="quantity">1</span>
+						<span class="price">$45.00</span>
+					</div>
+				</div>
+				<div class="totals">
+					<span class="subtitle">Subtotal <span id="sub_price">$45.00</span></span>
+					<span class="subtitle">Tax <span id="sub_tax">$2.00</span></span>
+					<span class="subtitle">Shipping <span id="sub_ship">$4.00</span></span>
+				</div>
+				<div class="final">
+					<span class="title">Total <span id="calculated_total">$51.00</span></span>
+				</div>
+			</div>	
+			<div class="right" id="reviewed">
+			
+				<div id="complete">
+			
+
+                                                
+<a href="../cart/index.html"><button  >back to cart</button></a>
+				<span class="sub">By selecting this button you agree to the purchase and subsequent payment for this order.</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+<!-- partial -->
+  
+</body>
+</html>

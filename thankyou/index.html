@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thank You Page</title>
+<!-- Google Fonts -->
+<link href='https://fonts.googleapis.com/css?family=Lato:300,400|Montserrat:700' rel='stylesheet' type='text/css' />
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+<style>
+  body {
+    background: linear-gradient(135deg, #ece9e6, #ffffff);
+    font-family: 'Lato', 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: #333;
+  }
+
+  /* Header styles */
+  .site-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .site-header__title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em;
+    color: #4a69ad;
+    font-weight: 700;
+  }
+
+  /* Main content styles */
+  .main-content {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+  }
+
+  .main-content__checkmark {
+    font-size: 4em;
+    color: #28a745;
+    margin-bottom: 20px;
+  }
+
+  .main-content__body {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  /* Button styles */
+  a > button {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    padding: 14px 24px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  a > button:hover {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+    transform: translateY(-2px);
+  }
+
+  /* Footer styles */
+  .site-footer {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .site-footer__fineprint {
+    font-size: 0.9em;
+    color: #777;
+  }
+
+  /* Responsive adjustments */
+  @media(max-width: 600px) {
+    body {
+      padding: 20px;
+    }
+    .main-content {
+      padding: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <h1 class="site-header__title" data-lead-id="site-header-title">THANK YOU!</h1>
+</header>
+
+<div class="main-content">
+  <i class="fa fa-check main-content__checkmark" id="checkmark"></i>
+  <p class="main-content__body" data-lead-id="main-content-body">
+    Thanks a bunch for filling that out. It means a lot to us, just like you do! We really appreciate you giving us a moment of your time today. Thanks for being you.
+  </p>
+  <a href="../index.html"><button>Home</button></a>
+</div>
+
+<footer class="site-footer" id="footer">
+  <p class="site-footer__fineprint" id="fineprint">Copyright ©2024 | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

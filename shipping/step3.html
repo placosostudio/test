@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Column Checkout Style</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<body>
+<div id="wrap">
+	<div id="grid">
+		<div class="column column1">
+		<div class="step" id="step1">
+			<div class="number">
+				<span>1</span>
+			</div>
+			<div class="title">
+				<h1>Email Address</h1>
+			</div>
+			<div class="modify">
+				<i class="fa fa-plus-circle"></i>
+			</div>
+		</div>
+		<div class="content" id="email">
+			<form class="go-right">
+				<div>
+        <input type="email" name="email" value="" id="email-address" placeholder="Email Address" data-trigger="change" data-validation-minlength="1" data-type="email" data-required="true" data-error-message="Enter a valid email address."/><label for="email">Email Address</label>
+        </div>
+				
+			</form>
+			<a class="continue" href="../shipping/step1.html">Continue</a>
+            </div></div>
+    </div> 
+       
+</div>
+
+ 	<div class="column column3">
+ 		<div class="step" id="step5">
+			<div class="number">
+				<span>5</span>
+			</div>
+			<div class="title">
+				<h1>Finalize Order</h1>
+			</div>
+			<div class="modify">
+				<i class="fa fa-plus-circle"></i>
+			</div>
+		</div>
+		<div class="content" id="final_products">
+			<div class="left" id="ordered">
+				<div class="products">
+					<div class="product_image">
+						<img src="https://i.imgur.com/YwqxBXc.jpg"/>
+					</div>
+					<div class="product_details">
+						<span class="product_name">Cherry Bikini</span>
+						<span class="quantity">1</span>
+						<span class="price">$45.00</span>
+					</div>
+				</div>
+				<div class="totals">
+					<span class="subtitle">Subtotal <span id="sub_price">$45.00</span></span>
+					<span class="subtitle">Tax <span id="sub_tax">$2.00</span></span>
+					<span class="subtitle">Shipping <span id="sub_ship">$4.00</span></span>
+				</div>
+				<div class="final">
+					<span class="title">Total <span id="calculated_total">$51.00</span></span>
+				</div>
+			</div>	
+		</div>
+	</div>
+</div>
+    
+    
+</body>
+<!-- partial -->
+  
+</body>
+</html>

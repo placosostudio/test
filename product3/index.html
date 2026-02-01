@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Product Display</title>
+
+<!-- Google Fonts for style -->
+<link href='https://fonts.googleapis.com/css?family=Lato:300,400|Montserrat:700' rel='stylesheet' />
+
+<style>
+  body {
+    background: linear-gradient(135deg, #f0f2f5, #ffffff);
+    font-family: 'Lato', 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .product {
+    display: flex;
+    max-width: 1000px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    flex-wrap: wrap;
+  }
+
+  /* Image section */
+  #productImages {
+    flex: 1 1 50%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mainImage {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .mainImage:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  /* Info section */
+  .productInfo {
+    flex: 1 1 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    color: #4a69ad;
+    margin-bottom: 10px;
+  }
+
+  .productId {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 15px;
+  }
+
+  .subProdInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .price {
+    font-size: 1.5em;
+    color: #28a745;
+    font-weight: 700;
+  }
+
+  .stock {
+    padding: 6px 12px;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+  }
+
+  p {
+    font-size: 1em;
+    margin-bottom: 20px;
+    color: #555;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  a {
+    color: #4a69ad;
+    text-decoration: underline;
+  }
+
+  .select-wrapper {
+    margin-bottom: 20px;
+  }
+
+  select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    transition: border-color 0.2s;
+  }
+
+  select:focus {
+    outline: none;
+    border-color: #4a69ad;
+    box-shadow: 0 0 8px rgba(74, 105, 173, 0.2);
+  }
+
+  /* Button styles */
+  #button {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  #button a button {
+    width: 100%;
+    max-width: 250px;
+    padding: 14px 20px;
+    font-size: 1.2em;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+
+  #button a button:hover {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive styles */
+  @media(max-width: 768px) {
+    .product {
+      flex-direction: column;
+    }
+    #productImages, .productInfo {
+      flex: 1 1 100%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="product">
+  <!-- Single Main Image -->
+  <div id="productImages">
+    <img src="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch3.jpg" alt="Product Image" class="mainImage" />
+  </div>
+
+  <!-- Product Info -->
+  <div class="productInfo">
+    <div>
+      <h1 class="title">White Floral Drip Sublimation T-Shirt</h1>
+      <span class="productId">Product: IreUQgxbjmPWoGawg</span>
+      <div class="subProdInfo">
+        <div class="price">£25.00</div>
+        <div class="stock">In Stock</div>
+      </div>
+      <p>white-t box logo</p>
+      <label>Sizes: <a href="#">Size Chart</a></label>
+      <div class="select-wrapper">
+        <select>
+          <option>S</option>
+          <option>M</option>
+          <option>L</option>
+          <option>XL</option>
+          <option>XXL</option>
+          <option>XXXL</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Add to Cart Button -->
+    <div id="button">
+      <a href="../cart/index.html"><button>Add to Cart</button></a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
