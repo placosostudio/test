@@ -215,6 +215,7 @@
 
       .product-image {
         width: 100%;
+hight: 100%;
         
 }
 
@@ -222,6 +223,8 @@
         width: 100%;
         padding: 0;
         margin-bottom: 10px;
+flex-direction: column;
+        align-items: flex-start
       }
 
       .product-price,
@@ -257,6 +260,15 @@
         font-size: 1.1em;
       }
     }
+
+
+.center {
+  margin: auto;
+  width: 50%;
+ 
+  padding: 10px;
+
+
   </style>
 </head>
 <body>
@@ -298,13 +310,13 @@
     <div class="product-image">
       <div class="productImage" style="background-image: url(https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch2.jpg); background-size: cover; background-position: center; width 200px; height: 200px; border-radius: 4px;"></div>
     </div>
-    <div class="product-details">
+    <div class="product-details center">
       <div class="product-title">Sample Product 2</div>
       <p class="product-description">
         Description of product 2.
       </p>
     </div>
-    <div class="product-price">$20.00</div>
+    <div class="product-price center">$20.00</div>
     <div class="product-quantity">
       <input type="number" value="2" min="1" />
     </div>
