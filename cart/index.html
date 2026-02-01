@@ -3,31 +3,156 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Enhanced Shopping Cart with Sizes</title>
+<title>Shopping Cart with Sizes & Gallery</title>
 <!-- Normalize CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" />
 <style>
+  /* Reset and base styles */
+body {
+  padding: 20px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  /* Add this CSS to your existing styles */
+/* Header */
+h1 {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 2em;
+  color: #222;
+}
+
+/* Gallery styles */
+#productGallery {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ccc;
+  scrollbar-width: thin;
+}
+.product-card {
+  flex: 0 0 auto;
+  width: 150px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
+  padding: 5px;
+  text-align: center;
+}
+.product-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+.product-card.selected {
+  border: 3px solid #2980b9;
+}
+.product-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+h4 {
+  font-size: 1em;
+  margin: 10px 0 0 0;
+}
+
+/* Buttons */
+#addProductBtn {
+  background-color: #2980b9;
+  color: #fff;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 350px;
+  transition: background 0.2s;
+}
+#addProductBtn:hover {
+  background-color: #3498db;
+}
+
+/* Discount input and button */
+#discountSection {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 350px;
+}
+#userDiscountInput {
+  flex: 1;
+  padding: 8px;
+  font-size: 1em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+#applyDiscountBtn {
+  background-color: #27ae60;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#applyDiscountBtn:hover {
+  background-color: #219150;
+}
+
+/* Cart styles */
+#shoppingCart {
+  width: 100%;
+  max-width: 1100px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+}
+
+/* Cart headers */
 .column-labels {
   display: flex;
+  flex-wrap: wrap;
   border-bottom: 2px solid #ddd;
-  padding-bottom: 12px;
-  margin-bottom: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
   font-weight: 600;
   font-size: 1em;
 }
 .column-labels label {
   flex: 1;
-  padding: 0 10px;
   min-width: 80px;
+  padding: 0 10px;
   text-align: left;
 }
+
+/* Cart items */
 .product {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  padding: 15px 0;
+  padding: 10px 0;
   border-bottom: 1px solid #eee;
+}
+.product:hover {
+  background-color: #fafafa;
 }
 .product-image {
   flex: 0 0 120px;
@@ -45,390 +170,204 @@
 }
 .product-details {
   flex: 2;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 .product-title {
   font-weight: 500;
   margin-bottom: 8px;
   font-size: 1.1em;
   color: #222;
-  margin-left: 10px; /* added spacing */
 }
 .product-price {
   flex: 0.8;
   font-weight: 600;
   font-size: 1.1em;
-  padding: 0 10px;
   min-width: 80px;
-  text-align: left; /* changed to left for better spacing */
+  text-align: center;
 }
 .product-size {
   flex: 1.2;
-  padding: 0 10px;
+  margin: 5px 10px;
 }
 .product-quantity {
-  flex: 1.2;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.product-quantity .number-control {
-  margin-left: 10px; /* spacing between size and quantity */
+.number-control {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100px;
+  background-color: #fff;
 }
-.product-removal {
-  flex: 0.8;
-  padding: 0 10px;
+.number-control input[type=number] {
+  width: 50px;
+  padding: 8px;
+  border: none;
+  text-align: center;
+  font-size: 1em;
 }
-.product-line-price {
-  flex: 0 0 120px;
-  text-align: right;
-  font-weight: 600;
-  font-size: 1.1em;
-  padding: 0 10px;
-  min-width: 80px;
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+.buttons button {
+  padding: 4px;
+  font-size: 1.4em;
+  width: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.remove-product {
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 5px;
+  font-size: 1em;
 }
 
+/* Total section styles */
+#cartTotals {
+  width: 100%;
+  max-width: 1100px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+}
+.totals-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.totals-item-total {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1.3em;
+}
 
-  body {
-    padding: 20px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  h1 {
-    text-align: center;
-    font-weight: 600;
-    margin-bottom: 20px;
-    font-size: 2em;
-    color: #222;
-  }
+/* Checkout button styling */
+.checkout {
+  display: block;
+  width: 100%;
+  max-width: 350px;
+  background-color: #27ae60;
+  color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.2em;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.checkout:hover {
+  background-color: #219150;
+}
 
-  /* Carousel styles (unchanged) */
-  .product-gallery {
-    display: flex;
-    overflow-x: auto;
-    gap: 15px;
-    padding: 10px;
-    margin-bottom: 30px;
-    width: 100%;
-    max-width: 1200px;
-    scroll-behavior: smooth;
-  }
-  .product-card {
-    flex: 0 0 150px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    padding: 5px;
-  }
-  .product-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-  }
-  .product-card img {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  .product-card h4 {
-    margin: 10px 0 5px 0;
-    font-size: 1em;
-    text-align: center;
-  }
-
-  /* Button styles */
-  .add-product-btn {
-    padding: 12px 24px;
-    background-color: #2980b9;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.2em;
-    transition: background 0.2s;
-    margin-bottom: 30px;
-  }
-  .add-product-btn:hover {
-    background-color: #3498db;
-  }
-
-  /* Cart styles (unchanged) */
-  .shopping-cart {
-    width: 100%;
-    max-width: 1100px;
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-  }
-  .column-labels {
-    display: flex;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 12px;
-    margin-bottom: 20px;
-    font-weight: 600;
-    font-size: 1em;
-  }
-  .column-labels label {
-    flex: 1;
-    padding: 0 10px;
-    min-width: 80px;
-  }
-  .product {
-    display: flex;
-    align-items: center;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
-    transition: background 0.2s;
-  }
-  .product:hover {
-    background-color: #fafafa;
-  }
-  .product-image {
-    flex: 0 0 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-  }
-  .productImage {
-    width: 100%;
-    height: 120px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 8px;
-  }
-  .product-details {
-    flex: 2;
-    padding: 0 20px;
-  }
-  .product-title {
-    font-weight: 500;
-    margin-bottom: 8px;
-    font-size: 1.1em;
-    color: #222;
-  }
-  .product-price {
-    flex: 0.8;
-    font-weight: 600;
-    font-size: 1.1em;
-    padding: 0 10px;
-    min-width: 80px;
-    text-align: center;
-  }
-  .product-quantity {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .size-selector {
-    margin-left: 10px;
-  }
-  select {
-    padding: 6px 8px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 1em;
-  }
-  /* Quantity control styles (unchanged) */
-  .number-control {
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 100px;
-    background-color: #fff;
-  }
-  .number-control input[type=number] {
-    width: 50px;
-    padding: 8px;
-    border: none;
-    text-align: center;
-    font-size: 1em;
-    outline: none;
-  }
-  .buttons {
-    display: flex;
-    flex-direction: column;
-  }
-  .buttons button {
-    background: #f0f0f0;
-    border: none;
-    padding: 4px;
-    font-size: 1.2em;
-    cursor: pointer;
-    line-height: 1;
-  }
-  .buttons button:hover {
-    background: #ddd;
-  }
-  .remove-product {
-    background-color: #e74c3c;
-    border: none;
-    color: #fff;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .remove-product:hover {
-    background-color: #c0392b;
-    transform: scale(1.05);
-  }
-  .product-line-price {
-    flex: 0 0 120px;
-    text-align: right;
-    font-weight: 600;
-    font-size: 1.1em;
-    padding: 0 10px;
-    min-width: 80px;
-  }
-
-  /* Totals styles (unchanged) */
-  .totals {
-    margin-top: 30px;
-    border-top: 2px solid #ddd;
-    padding-top: 20px;
-  }
-  .totals-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    font-size: 1em;
-  }
-  .totals-item label {
-    font-weight: 500;
-  }
-  .totals-value {
-    min-width: 80px;
-    text-align: right;
-    font-weight: 600;
-  }
-  .totals-item-total {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 700;
-    font-size: 1.3em;
-  }
-  /* Checkout Button */
-  .checkout {
-    display: inline-block;
-    background-color: #27ae60;
-    color: #fff;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.2em;
-    cursor: pointer;
-    margin-top: 30px;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .checkout:hover {
-    background-color: #219150;
-    transform: translateY(-2px);
-  }
-
-  /* Popup overlay styles (unchanged) */
-  .popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    display: none;
-  }
-  .popup {
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 350px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  }
-  .popup h2 {
-    margin-bottom: 15px;
-  }
-  .popup button {
-    padding: 10px 20px;
-    margin-top: 15px;
-    border: none;
-    background-color: #2980b9;
-    color: #fff;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  .popup button:hover {
-    background-color: #3498db;
-  }
+/* Popup styles for overlays */
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0; right:0; bottom:0;
+  background: rgba(0,0,0,0.5);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  display: none;
+}
+.popup {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 90%;
+  width: 350px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  text-align: center;
+}
+.popup h2 {
+  margin-bottom: 15px;
+}
+.popup button {
+  padding: 10px 20px;
+  margin-top: 15px;
+  border: none;
+  background-color: #2980b9;
+  color: #fff;
+  border-radius: 8px;
+  width: 100%;
+}
+.popup button:hover {
+  background-color: #3498db;
+}
 </style>
 </head>
 <body>
 
 <h1>Shopping Cart with Sizes & Carousel</h1>
 
-<!-- Carousel of products -->
-<div class="product-gallery" id="productGallery">
-  <!-- 10 products with images -->
+<!-- Product gallery with 10 items -->
+<div id="productGallery">
+  <!-- Product 1 to 10 -->
   <div class="product-card" data-title="Product 1" data-price="100" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch1.jpg">
     <img src="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch1.jpg" alt="">
     <h4>Product 1</h4>
   </div>
-  <div class="product-card" data-title="Product 2" data-price="120" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch2.jpg">
+  <div class="product-card" data-title="Product 2" data-price="150" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch2.jpg">
     <img src="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch2.jpg" alt="">
     <h4>Product 2</h4>
   </div>
-  <div class="product-card" data-title="Product 3" data-price="150" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch3.jpg">
+  <div class="product-card" data-title="Product 3" data-price="200" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch3.jpg">
     <img src="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch3.jpg" alt="">
     <h4>Product 3</h4>
   </div>
-  <div class="product-card" data-title="Product 4" data-price="200" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch4.jpg">
+  <div class="product-card" data-title="Product 4" data-price="120" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch4.jpg">
     <img src="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch4.jpg" alt="">
     <h4>Product 4</h4>
   </div>
-  <div class="product-card" data-title="Product 5" data-price="250" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch5.jpg">
+  <div class="product-card" data-title="Product 5" data-price="180" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch5.jpg">
     <img src="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch5.jpg" alt="">
     <h4>Product 5</h4>
   </div>
-  <div class="product-card" data-title="Product 6" data-price="300" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch6.jpg">
+  <div class="product-card" data-title="Product 6" data-price="130" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch6.jpg">
     <img src="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch6.jpg" alt="">
     <h4>Product 6</h4>
   </div>
-  <div class="product-card" data-title="Product 7" data-price="350" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch7.jpg">
+  <div class="product-card" data-title="Product 7" data-price="170" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch7.jpg">
     <img src="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch7.jpg" alt="">
     <h4>Product 7</h4>
   </div>
-  <div class="product-card" data-title="Product 8" data-price="400" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch8.jpg">
+  <div class="product-card" data-title="Product 8" data-price="160" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch8.jpg">
     <img src="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch8.jpg" alt="">
     <h4>Product 8</h4>
   </div>
-  <div class="product-card" data-title="Product 9" data-price="450" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch9.jpg">
+  <div class="product-card" data-title="Product 9" data-price="190" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch9.jpg">
     <img src="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch9.jpg" alt="">
     <h4>Product 9</h4>
   </div>
-  <div class="product-card" data-title="Product 10" data-price="500" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch10.jpg">
+  <div class="product-card" data-title="Product 10" data-price="210" data-img="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch10.jpg">
     <img src="https://raw.githubusercontent.com/burzachem/mustytrapstar/gh-pages/images/muztymarch10.jpg" alt="">
     <h4>Product 10</h4>
   </div>
 </div>
 
-<!-- Button to add selected product with size -->
-<button class="add-product-btn" onclick="addSelectedProduct()">Add Selected Product to Cart</button>
+<!-- Button to add selected product -->
+<button id="addProductBtn" onclick="addSelectedProduct()">Add Selected Product to Cart</button>
+
+<!-- Discount input and button -->
+<div id="discountSection">
+  <input type="text" id="userDiscountInput" placeholder="Enter discount code" />
+  <button id="applyDiscountBtn" onclick="applyDiscount()">Apply Discount</button>
+</div>
 
 <!-- Shopping Cart -->
-<div class="shopping-cart" id="shoppingCart">
+<div id="shoppingCart">
   <div class="column-labels">
     <label class="product-image">Image</label>
     <label class="product-details">Product</label>
@@ -438,107 +377,47 @@
     <label class="product-removal">Remove</label>
     <label class="product-line-price">Total</label>
   </div>
-  <!-- Products added dynamically here -->
 </div>
 
-
-  <!-- Totals -->
-  <div class="totals">
-    <div class="totals-item">
-      <label>Subtotal</label>
-      <div class="totals-value" id="cart-subtotal">$50.00</div>
-    </div>
-    <div class="totals-item">
-      <label>Tax (5%)</label>
-      <div class="totals-value" id="cart-tax">$2.50</div>
-    </div>
-    <div class="totals-item">
-      <label>Shipping</label>
-      <div class="totals-value" id="cart-shipping">$10.00</div>
-    </div>
-    <div class="totals-item totals-item-total">
-      <label>Grand Total</label>
-      <div class="totals-value" id="cart-total">$62.50</div>
-    </div>
+<!-- Totals -->
+<div id="cartTotals">
+  <div class="totals-item">
+    <label>Subtotal</label>
+    <div class="totals-value" id="cart-subtotal">$0.00</div>
   </div>
-
-<a href="../shipping/step1.html"><button class="checkout">Checkout</button></a> 
-
-</div>
-
-
-
-<!-- Popup for 30% Off after $5000 -->
-<div class="popup-overlay" id="popupOverlay">
-  <div class="popup" id="popupContent">
-    <h2>Congratulations! 🎉</h2>
-    <p>You've earned a 30% discount for spending over $5000!</p>
-    <button onclick="closePopup()">Claim Your Discount</button>
+  <div class="totals-item">
+    <label>Tax (5%)</label>
+    <div class="totals-value" id="cart-tax">$0.00</div>
   </div>
+  <div class="totals-item">
+    <label>Shipping</label>
+    <div class="totals-value" id="cart-shipping">$0.00</div>
+  </div>
+  <div class="totals-item totals-item-total">
+    <label>Grand Total</label>
+    <div class="totals-value" id="cart-total">$0.00</div>
+    <a href="../shipping/step1.html"><button class="checkout">Checkout</button></a> 
+
+  </div>
+  
 </div>
 
-
-<!-- PayPal Button -->
+<!-- PayPal Button Container (placeholder) -->
 <div id="paypal-button-container"></div>
-
-<!-- Popup for 30% Off after $5000 -->
-<div class="popup-overlay" id="popupOverlay">
-  <div class="popup" id="popupContent">
-    <h2>Congratulations! 🎉</h2>
-    <p>You've earned a 30% discount for spending over $5000!</p>
-    <button onclick="closePopup()">Claim Your Discount</button>
-  </div>
-</div>
-<!-- First Popup: Enter Email for Discount -->
-<div class="popup-overlay" id="emailPopup" style="display: none;">
-  <div class="popup" id="emailPopupContent">
-    <h2>Claim Your Discount</h2>
-    <p>Enter your email to receive your 30% discount code:</p>
-    <input type="email" id="userEmail" placeholder="Your email" style="width: 100%; padding: 10px; margin-bottom: 10px;"/>
-    <button onclick="submitEmail()">Send Discount Code</button>
-    <button onclick="closePopup()">Cancel</button>
-  </div>
-</div>
-
-<!-- Second Popup: Confirmation with Discount Code -->
-<div class="popup-overlay" id="discountPopup" style="display: none;">
-  <div class="popup" id="discountPopupContent">
-    <h2>Congratulations! 🎉</h2>
-    <p>You’ve earned a 30% discount!</p>
-    <p>Your discount code is: <strong id="discountCode">DISCOUNT30</strong></p>
-    <p>Enter or verify your code below:</p>
-    <input type="text" id="userCode" style="width: 100%; padding: 10px; margin-bottom: 10px;"/>
-    <button onclick="copyCode()">Copy Code</button>
-    <button onclick="closePopup()">Close</button>
-    <button onclick="addCustomCode()">Add Custom Code</button>
-  </div>
-</div>
-
- 
-<div id="discountDisplay" style="display: none;">
-  <h2>🎉 Congratulations!</h2>
-  <p>Your discount code is:</p>
-  <input type="text" id="discountCode" value="DISCOUNT30" readonly />
-  <p>Enter or verify your code below:</p>
-  <input type="text" id="userDiscountInput" placeholder="Enter discount code" style="width: 100%; padding: 10px; margin-bottom: 10px;"/>
-  <button onclick="applyDiscount()">Apply Discount</button>
-  <button onclick="closeDiscountDisplay()">Close</button>
-  <button onclick="addCustomCode()">Add Custom Code</button>
-</div>
-
 
 <!-- Scripts -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
 <script>
-  let discountPercent = 0; // 0 means no discount
+  // Variables for discount
+  let discountCode = 'MYCODE123';
+  let discountPercent = 30; // set this to 0 if no discount
+  let discountActive = false;
 
-  
+  // Select product
   let selectedProduct = null;
-  let totalSpent = 0;
-  let discountApplied = false;
 
-  // Auto-rotate carousel
+  // Auto-scroll carousel
   const gallery = document.getElementById('productGallery');
   let autoScrollInterval = null;
 
@@ -549,17 +428,15 @@
       if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth) {
         gallery.scrollLeft = 0;
       }
-    }, 20); // Adjust speed here
+    }, 20);
   }
   startAutoScroll();
-  gallery.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
-  gallery.addEventListener('mouseleave', () => startAutoScroll());
 
-  // Product selection
+  // Select product on click
   document.querySelectorAll('.product-card').forEach(card => {
     card.addEventListener('click', () => {
-      document.querySelectorAll('.product-card').forEach(c => c.style.border = '');
-      card.style.border = '2px solid #2980b9';
+      document.querySelectorAll('.product-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
       selectedProduct = {
         title: card.dataset.title,
         price: parseFloat(card.dataset.price),
@@ -568,30 +445,20 @@
     });
   });
 
-  // Add product with size
+  // Add selected product to cart
 function addSelectedProduct() {
   if (!selectedProduct) {
-    alert('Please select a product from the gallery!');
+    alert('Please select a product!');
     return;
   }
-
   const cart = document.getElementById('shoppingCart');
 
-  // Create product row
   const productDiv = document.createElement('div');
   productDiv.className = 'product';
 
-  // Append at bottom
-  cart.appendChild(productDiv);
-
-  // Default size selection
   const sizeOptions = ['S', 'M', 'L', 'XL', 'XXL'];
-  const sizeSelectHTML = `
-    <select class="size-select">
-      ${sizeOptions.map(size => `<option value="${size}">${size}</option>`).join('')}
-    </select>`;
-  
-  // Set inner HTML with size selector
+  const sizeOptionsHTML = sizeOptions.map(s => `<option value="${s}">${s}</option>`).join('');
+
   productDiv.innerHTML = `
     <div class="product-image">
       <div class="productImage" style="background-image: url(${selectedProduct.img});"></div>
@@ -600,7 +467,9 @@ function addSelectedProduct() {
       <div class="product-title">${selectedProduct.title}</div>
     </div>
     <div class="product-price center">$${selectedProduct.price.toFixed(2)}</div>
-    <div class="product-size">${sizeSelectHTML}</div>
+    <div class="product-size">
+      <select class="size-select">${sizeOptionsHTML}</select>
+    </div>
     <div class="product-quantity">
       <div class="number-control">
         <input type="number" value="1" min="1" />
@@ -616,16 +485,11 @@ function addSelectedProduct() {
     <div class="product-line-price">$${selectedProduct.price.toFixed(2)}</div>
   `;
 
-  // Bind events
+  // Bind quantity change
   const qtyInput = productDiv.querySelector('.product-quantity input');
   qtyInput.addEventListener('change', () => updateQuantity(qtyInput));
-
-  // Optional: update total when size changes (if needed)
-  const sizeSelect = productDiv.querySelector('.size-select');
-  sizeSelect.addEventListener('change', () => {
-    // You can handle size-specific logic here if needed
-  });
-
+  // Append to cart
+  cart.appendChild(productDiv);
   recalculateCart();
 }
 
@@ -644,53 +508,58 @@ function changeNumber(btn, delta) {
 
 // Remove product
 function removeProduct(btn) {
-  if (confirm('Are you sure you want to remove this item?')) {
+  if (confirm('Remove this item?')) {
     btn.closest('.product').remove();
     recalculateCart();
   }
 }
 
-// Update quantity
+// Update line price on quantity change
 function updateQuantity(input) {
-  const priceText = input.closest('.product').querySelector('.product-price').innerText;
-  const price = parseFloat(priceText.replace('$', ''));
-  const quantity = parseInt(input.value);
-  const linePrice = price * quantity;
+  const price = parseFloat(input.closest('.product').querySelector('.product-price').innerText.replace('$', ''));
+  const qty = parseInt(input.value);
+  const linePrice = price * qty;
   input.closest('.product').querySelector('.product-line-price').innerText = '$' + linePrice.toFixed(2);
   recalculateCart();
 }
 
-// Recalculate totals
+// Recalculate totals and apply discount if active
 function recalculateCart() {
   let subtotal = 0;
   document.querySelectorAll('.product').forEach(p => {
     const linePrice = parseFloat(p.querySelector('.product-line-price').innerText.replace('$', ''));
     subtotal += linePrice;
   });
-  const tax = subtotal * 0.16;
+  const tax = subtotal * 0.05;
   const shipping = subtotal > 0 ? 10 : 0;
-  const total = subtotal + tax + shipping;
+  let total = subtotal + tax + shipping;
+
+  if (discountActive && discountPercent > 0) {
+    total = total - (total * (discountPercent / 100));
+  }
 
   document.getElementById('cart-subtotal').innerText = '$' + subtotal.toFixed(2);
   document.getElementById('cart-tax').innerText = '$' + tax.toFixed(2);
   document.getElementById('cart-shipping').innerText = '$' + shipping.toFixed(2);
   document.getElementById('cart-total').innerText = '$' + total.toFixed(2);
-
-  // Track total spent for discount pop-up
-  totalSpent += total;
-  if (totalSpent >= 5000 && !discountApplied) {
-    showPopup();
-    discountApplied = true;
-  }
-
-  // Show/hide checkout
-  document.querySelector('.checkout').style.display = total > 0 ? 'inline-block' : 'none';
 }
 
-// PayPal setup (unchanged)
+// Apply discount code
+function applyDiscount() {
+  const userCode = document.getElementById('userDiscountInput').value.trim();
+  if (userCode.toUpperCase() === discountCode.toUpperCase()) {
+    alert('Discount code applied!');
+    discountActive = true;
+    recalculateCart();
+  } else {
+    alert('Invalid discount code.');
+  }
+}
+
+// PayPal button setup (replace YOUR_CLIENT_ID)
 paypal.Buttons({
   createOrder: function(data, actions) {
-    const amount = parseFloat(document.getElementById('cart-total').innerText.replace('$',''));
+    const amount = parseFloat(document.getElementById('cart-total').innerText.replace('$', ''));
     return actions.order.create({
       purchase_units: [{ amount: { value: amount.toFixed(2) } }]
     });
@@ -702,133 +571,42 @@ paypal.Buttons({
   }
 }).render('#paypal-button-container');
 
-// Show popup
-function showPopup() {
-  document.getElementById('popupOverlay').style.display = 'flex';
+// Popup functions
+function showPopup(id) {
+  document.getElementById(id).style.display = 'flex';
 }
-function closePopup() {
-  document.getElementById('popupOverlay').style.display = 'none';
-}
-
-// Initialize cart total
-recalculateCart();
-</script>
-
-<script>
-
-  // Show specific popup
-function showPopup(popupId) {
-  document.getElementById(popupId).style.display = 'flex';
-}
-
-// Close all popups
 function closePopup() {
   document.querySelectorAll('.popup-overlay').forEach(p => p.style.display = 'none');
 }
 
-// Handle email submission
-function submitEmail() {
-  const email = document.getElementById('userEmail').value;
-  if (email) {
-    // Here, you could send email to your server if needed
+// Generate discount code from email/phone
+function generateDiscount() {
+  const contact = document.getElementById('userContact').value.trim();
+  if (contact) {
     closePopup('emailPopup');
-    // Show the confirmation popup
-    showPopup('discountPopup');
-    // You can generate a dynamic code if you want
-    document.getElementById('discountCode').innerText = 'DISCOUNT30'; // Or generate dynamically
+    document.getElementById('discountCode').value = 'DISCOUNT30'; // or generate dynamically
+    alert('Your discount code is: DISCOUNT30');
   } else {
-    alert('Please enter a valid email.');
+    alert('Please enter your email or phone.');
   }
 }
 
-// Copy code to clipboard
-function copyCode() {
-  const code = document.getElementById('discountCode').innerText;
-  const userCodeInput = document.getElementById('userCode');
-  userCodeInput.value = code;
-  userCodeInput.select();
+// Copy discount code
+function copyDiscountCode() {
+  const code = document.getElementById('discountCode');
+  code.select();
   document.execCommand('copy');
-  alert('Discount code copied to clipboard!');
+  alert('Code copied!');
 }
 
-
-</script>
-<!-- Button to trigger discount popup -->
-<button onclick="showEmailPopup()">Get Discount</button>
-
-<!-- Email/Phone popup overlay -->
-<div class="popup-overlay" id="emailPopup">
-  <div id="emailPopupContent">
-    <h2>Claim Your Discount</h2>
-    <p>Enter your email or phone number to receive your 30% discount code:</p>
-    <input type="text" id="userContact" placeholder="Email or Phone" />
-    <div style="margin-top: 15px;">
-      <button onclick="generateDiscount()">Get Discount</button>
-      <button onclick="closePopup()">Cancel</button>
-    </div>
-  </div>
-</div>
-
-<!-- Discount message overlay -->
-<div id="discountDisplay">
-  <h2>🎉 Congratulations!</h2>
-  <p>Your discount code is:</p>
-  <input type="text" id="discountCode" value="DISCOUNT30" readonly />
-  <div style="margin-top: 15px;">
-    <button onclick="copyDiscountCode()">Copy Discount Code</button>
-    <button onclick="closeDiscountDisplay()">Close</button>
-    <!-- Add Code Button -->
-    <button onclick="addCustomCode()">Add Custom Code</button>
-  </div>
-</div>
-
-<script>
-  // Show the email/phone input popup
-  function showEmailPopup() {
-    document.getElementById('emailPopup').style.display = 'flex';
+// Add custom discount code
+function addCustomCode() {
+  const customCode = prompt("Enter your custom discount code:", "MYCODE123");
+  if (customCode && customCode.trim() !== "") {
+    document.getElementById('discountCode').value = customCode.trim();
+    alert('Custom code saved!');
   }
-
-  // Close the email popup
-  function closePopup() {
-    document.getElementById('emailPopup').style.display = 'none';
-  }
-
-  // Generate and show discount code
-  function generateDiscount() {
-    const contact = document.getElementById('userContact').value.trim();
-    if (contact) {
-      closePopup();
-      showDiscountDisplay();
-    } else {
-      alert('Please enter your email or phone number.');
-    }
-  }
-
-  // Show the discount message with code
-  function showDiscountDisplay() {
-    document.getElementById('discountDisplay').style.display = 'block';
-  }
-
-  // Close the discount display
-  function closeDiscountDisplay() {
-    document.getElementById('discountDisplay').style.display = 'none';
-  }
-
-  // Copy discount code to clipboard
-  function copyDiscountCode() {
-    const codeInput = document.getElementById('discountCode');
-    codeInput.select();
-    document.execCommand('copy');
-    alert('Discount code copied to clipboard!');
-  }
-
-  // Add a custom discount code
-  function addCustomCode() {
-    const customCode = prompt("Enter your custom discount code:", "MYCODE123");
-    if (customCode && customCode.trim() !== "") {
-      document.getElementById('discountCode').value = customCode.trim();
-    }
-  }
+}
 </script>
 </body>
 </html>
